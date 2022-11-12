@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'info.solidsoft.pitest' version '1.9.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    //pitest 'org.example.pit.plugins:pitest-custom-plugin:0.42'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pitest {
+    //adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
+    junit5PluginVersion = '1.0.0'    //or 0.15 for PIT <1.9.0
+    targetClasses = ['org.example.firstmutationgradle.FizzBuzzGenerator*', 'org.example.firstmutationgradle.A*']  //by default "${project.group}.*"
+}
